@@ -1,0 +1,13 @@
+getDuplicateAssetwithSN: function() {
+        var str1 = [];
+        var gr = new GlideAggregate('alm_asset');
+        gr.addAggregate('COUNT', 'serial_number');
+        gr.groupBy('serial_number');
+        gr.addHaving('COUNT', '>', 1);
+        gr.query();
+        while (gr.next()) {
+            str1.push(gr.getValue('serial_number') + '');
+        }
+        return str1.toString();
+
+    }
